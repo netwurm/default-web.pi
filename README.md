@@ -21,7 +21,7 @@ $ git clone https://github.com/netwurm/default-web.pi.git
 
 
 
-## Einrichten libwebp 
+## Installation
 
 ``` bash
 # Autoconf Tools 
@@ -46,7 +46,7 @@ make install
 
 
 
-## Installation
+## Run Optionen 
 
 ``` bash
 
