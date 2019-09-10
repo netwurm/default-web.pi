@@ -47,7 +47,7 @@ npm run watch
 
 PI Install libwebp
 
-apt-get install -y gcc make autoconf automake libtool libjpeg-devel libpng-devel
+apt-get install -y gcc make autoconf automake libtool libjpeg-dev libpng-dev
 wget storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.0.3.tar.gz
 tar -zxvf libwebp-1.0.3.tar.gz
 cd libwebp-1.0.3
