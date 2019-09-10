@@ -53,7 +53,7 @@ make install
 # Install 
 npm install
 
-# zuerst ausführen
+# zuerst ausführen <- legt im src ein Verzeichnis mit Bulma sass an!  
 npm run convert
 
 # BrowserSync 
