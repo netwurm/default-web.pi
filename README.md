@@ -68,7 +68,7 @@ npm run watch
 ```
 
 
-## Run Optionen 
+## npm  
 
 ``` bash
 $ npm run
