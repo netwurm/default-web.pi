@@ -1,0 +1,61 @@
+{
+  "name": "default-web.pi",
+  "version": "1.0.0",
+  "description": "Default Page PI - PHP Template",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp",
+    "serve": "gulp serve",
+    "watch": "gulp watch",
+    "convert": "gulp convert"
+  },
+  "keywords": [],
+  "author": "netwurm",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/node": "^7.6.1",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/register": "^7.6.0",
+    "@fullhuman/postcss-purgecss": "^1.2.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "browser-sync": "^2.26.7",
+    "bulma": "^0.7.5",
+    "clean-css": "^4.2.1",
+    "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect-php": "^1.0.3",
+    "gulp-copy": "^4.0.1",
+    "gulp-cwebp": "^3.0.0",
+    "gulp-debug": "^4.0.0",
+    "gulp-ignore": "^3.0.0",
+    "gulp-images-resizer": "0.0.7",
+    "gulp-imagemin": "^6.1.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "gulp-util": "^3.0.8",
+    "path": "^0.12.7",
+    "postcss-import": "^12.0.1",
+    "postcss-prettify": "^0.3.4",
+    "precss": "^4.0.0",
+    "sass-convert": "^0.5.2"
+  },
+  "private": true,
+  "dependencies": {
+    "cwebp-bin": "^5.1.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    ">1%"
+  ]
+}
