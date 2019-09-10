@@ -22,6 +22,8 @@ $ git clone https://github.com/netwurm/default-web.pi.git
 ## Installation
 
 ``` bash
+sudo apt-get install libtool automake autoconf nasm
+
 # Install 
 npm install
 
