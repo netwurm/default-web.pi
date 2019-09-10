@@ -19,15 +19,41 @@ $ git clone https://github.com/netwurm/default-web.pi.git
 
 ```
 
+
+
+## Einrichten libwebp 
+
+``` bash
+# Autoconf Tools 
+sudo apt-get install libtool automake autoconf nasm
+
+# siehe auch Dokumentation Quelltext! 
+# gulpfile.babel.js
+
+# PI Install libwebp
+
+apt-get install -y gcc make autoconf automake libtool libjpeg-dev libpng-dev
+wget storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.0.3.tar.gz
+tar -zxvf libwebp-1.0.3.tar.gz
+cd libwebp-1.0.3
+./configure
+make
+make install
+
+```
+
+
+
+
+
 ## Installation
 
 ``` bash
-sudo apt-get install libtool automake autoconf nasm
 
 # Install 
 npm install
 
-# 1.) Copy node_modules/bulma/ nach 'src/sass/ 2.)
+# zuerst ausführen
 npm run convert
 
 # BrowserSync 
@@ -41,23 +67,6 @@ npm run watch
 
 ```
 
-## Einrichten libwebp
-
-``` bash
-# siehe auch Dokumentation Quelltext! 
-# gulpfile.babel.js
-
-PI Install libwebp
-
-apt-get install -y gcc make autoconf automake libtool libjpeg-dev libpng-dev
-wget storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.0.3.tar.gz
-tar -zxvf libwebp-1.0.3.tar.gz
-cd libwebp-1.0.3
-./configure
-make
-make install
-
-```
 
 ## Run Optionen 
 
