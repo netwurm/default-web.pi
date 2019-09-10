@@ -12,15 +12,10 @@
 > Websites Template / Win & PI 
 
 
-## Download
+## Download    
 
 ``` bash
-# 1.) Erstelle ein Verzeichnis -> www Path WAMP-Server
-# 2.) dann per "git clone ...." Daten reinladen
-$ git clone https://github.com/netwurm/Bulma-PHP-Template.git
-
-# in das Verzeichnis wechseln und Installation per npm beginnen 
-$ cd Bulma-PHP-Template\
+$ git clone https://github.com/netwurm/default-web.pi.git
 
 ```
 
@@ -80,7 +75,7 @@ Scripts available in Template_PHP_Bulma via `npm run-script`:
 ## Version
  
 * 1.0.0
-    * 10.09.2019 - Github (Beta - online) 
+    * 10.09.2019 - Github 
 
 ## Meta
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
