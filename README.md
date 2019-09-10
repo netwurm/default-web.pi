@@ -67,22 +67,6 @@ npm run watch
 
 ```
 
-
-## npm  
-
-``` bash
-$ npm run
-Scripts available in Template_PHP_Bulma via `npm run-script`:
-  build
-    gulp
-  serve
-    gulp serve
-  watch
-    gulp watch
-  convert
-    gulp convert
-	
-```
 ## Version
  
 * 1.0.0
