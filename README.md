@@ -51,21 +51,28 @@ make install
 ``` bash
 
 # Install 
-npm install
+yarn install
 
 # zuerst ausführen <- legt im src ein Verzeichnis mit Bulma sass an!  
-npm run convert
+yarn run convert
 
 # BrowserSync 
-npm run serve
+yarn run serve
 
 # Dateien erzeugen 
-npm run build
+yarn run build
 
 # Überwachen von Änderungen ohne BrowserSync
-npm run watch
+yarn run watch
+
+# upgrade latest
+yarn upgrade --latest
 
 ```
+
+
+
+
 
 ## Version
  

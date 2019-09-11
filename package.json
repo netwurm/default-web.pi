@@ -8,7 +8,7 @@
     "serve": "gulp serve",
     "watch": "gulp watch",
     "convert": "gulp convert",
-	"tests": "gulp tests"
+    "tests": "gulp tests"
   },
   "keywords": [],
   "author": "netwurm",
@@ -35,8 +35,8 @@
     "gulp-cwebp": "^3.0.0",
     "gulp-debug": "^4.0.0",
     "gulp-ignore": "^3.0.0",
-    "gulp-images-resizer": "0.0.7",
     "gulp-imagemin": "^6.1.0",
+    "gulp-images-resizer": "0.0.7",
     "gulp-newer": "^1.4.0",
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
@@ -52,9 +52,7 @@
     "sass-convert": "^0.5.2"
   },
   "private": true,
-  "dependencies": {
-    "cwebp-bin": "^5.1.0"
-  },
+  "dependencies": {},
   "browserslist": [
     "last 2 versions",
     ">1%"
