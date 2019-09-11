@@ -45,7 +45,17 @@ import rename from 'gulp-rename'
 
 // Image 
 import imagemin from 'gulp-imagemin'
-import cwebp from 'gulp-cwebp'
+
+
+var RASPBERRY = true;
+
+/* nur wenn cwebp unterstützt wird 
+//////////////////////////////////////
+// import cwebp from 'gulp-cwebp'
+///////////////////////////////////////
+*/
+
+// yarn add  gulp-cwebp --dev
 import imageResize from 'gulp-images-resizer'
 
 
@@ -84,6 +94,10 @@ Evtl. noch einen Symbolischen Link auf "cwebp"
 
 ln -sf /usr/local/share/.config/yarn/global/node_modules/cwebp-bin/vendor/cwebp /home/web/www/html/default-web.pi/node_modules/gulp-cwebp/node_modules/cwebp-bin/vendor/cwebp 
 
+oder
+
+var RASPBERRY = true;
+
 
 
 autoreconf -vfi
@@ -115,7 +129,7 @@ var json = JSON.parse(fs.readFileSync('./package.json'));
 var bulma_version = json.devDependencies.bulma.trim().replace("^", "");
 bulma_version = 'Bulma_' + bulma_version;
 var local_dir = __dirname + '\\src\\sass\\' + bulma_version;
-
+var exec = require('child_process').exec;
 
 const config = {
 	paths: {
@@ -262,7 +276,9 @@ const scripts = () => {
 		.pipe(concat('app.js'))
 		.pipe(uglify())
 		.pipe(sourcemaps.write('./'))
-		.pipe(debug({title: 'datei:'}))
+		.pipe(debug({
+			title: 'datei:'
+		}))
 		.pipe(gulp.dest(config.paths.dist.js));
 }
 
@@ -278,16 +294,143 @@ function memory() {
 }
 
 // Images *.webp
-function imageswebp() {
 
-	return gulp.src(config.paths.src.img)
-		.pipe(imageResize({
-			width: 600
-		}))
-		.pipe(cwebp(), memory())
-		.pipe(debug({title: 'datei:'}))
-		.pipe(gulp.dest(config.paths.dist.img));
+const imageswebp = (done) => {
+
+	if (RASPBERRY === true) {
+		gulp.src(config.paths.src.img)
+
+			//.pipe(debug({minimal: false}))
+
+			.pipe(rename(function (path, file) {
+
+				if (file.isNull()) {
+					util.log('Debug: file.isNull');
+					return done();
+				}
+
+				if (file.isStream()) {
+					util.log('Debug: file.isStream');
+					return done();
+				}
+				if (['.jpg', '.jpeg', '.png'].indexOf(path.extname) === -1) {
+					util.log('Debug: path.extname not .jpg[g] or .png');
+					return done();
+				}
+
+
+				//cwebp [-preset <...>] [options] in_file [-o out_file]			
+				// util.log(path);
+				// util.log(file.path);
+				// util.log(config.paths.dist.img);
+				/*				
+				11 Sep 08:59:37 - { dirname: '.', basename: 'IMG_3155', extname: '.png' }
+				11 Sep 08:59:37 - /home/web/www/html/default-web.pi/src/img/IMG_3155.png
+				11 Sep 08:59:37 - ./dist/img				
+				*/
+				var input_image = file.path;
+				var output_image = config.paths.dist.img + '/' + path.basename + '.webp';
+
+				exec('/usr/local/bin/cwebp -resize 600 0 ' + input_image + ' -o ' + output_image, function (err, stdout, stderr) {
+					//util.log(stdout);
+					//util.log(stderr);
+
+					fs.exists(output_image, function (exists) {
+						if (exists) {
+							util.log('ok -> ' + output_image);
+						} else {
+							util.log('error:' + output_image);
+						}
+					});
+
+
+					return 0;
+				});
+
+
+			}))
+
+
+		done();
+
+	} else {
+
+
+		return gulp.src(config.paths.src.img)
+			.pipe(imageResize({
+				width: 600
+			}))
+			.pipe(cwebp(), memory())
+			.pipe(debug({
+				title: 'datei:'
+			}))
+			.pipe(gulp.dest(config.paths.dist.img));
+		done();
+	}
+	done();
 }
+
+
+//var log = require('fancy-log');
+// Images *.webp
+const testen = (done) => {
+
+	gulp.src(config.paths.src.img)
+
+		//.pipe(debug({minimal: false}))
+
+		.pipe(rename(function (path, file) {
+
+			if (file.isNull()) {
+				util.log('Debug: file.isNull');
+				return done();
+			}
+
+			if (file.isStream()) {
+				util.log('Debug: file.isStream');
+				return done();
+			}
+			if (['.jpg', '.jpeg', '.png'].indexOf(path.extname) === -1) {
+				util.log('Debug: path.extname not .jpg[g] or .png');
+				return done();
+			}
+
+
+			//cwebp [-preset <...>] [options] in_file [-o out_file]			
+			// util.log(path);
+			// util.log(file.path);
+			// util.log(config.paths.dist.img);
+			/*				
+			11 Sep 08:59:37 - { dirname: '.', basename: 'IMG_3155', extname: '.png' }
+			11 Sep 08:59:37 - /home/web/www/html/default-web.pi/src/img/IMG_3155.png
+			11 Sep 08:59:37 - ./dist/img				
+			*/
+			var input_image = file.path;
+			var output_image = config.paths.dist.img + '/ggg' + path.basename + '.webp';
+
+			exec('/usr/local/bin/cwebp -resize 600 0 ' + input_image + ' -o ' + output_image, function (err, stdout, stderr) {
+				//util.log(stdout);
+				//util.log(stderr);
+
+				fs.exists(output_image, function (exists) {
+					if (exists) {
+						util.log('ok -> ' + output_image);
+					} else {
+						util.log('error:' + output_image);
+					}
+				});
+
+
+				return 0;
+			});
+
+
+		}))
+
+
+	done();
+}
+
 
 // Images optimieren
 function images() {
@@ -315,7 +458,9 @@ function images() {
 			width: 600
 		}))
 		.pipe(imagemin(plugins))
-		.pipe(debug({title: 'datei:'}))
+		.pipe(debug({
+			title: 'datei:'
+		}))
 		.pipe(gulp.dest(config.paths.dist.img));
 }
 
@@ -336,7 +481,7 @@ function imagesthumb(cb) {
 	[100, 200, 300, 400].forEach(function (size) {
 		// gulp.src('src/images/**/*.{jpg,jpeg,png}')
 		gulp.src(config.paths.src.img)
-			
+
 			.pipe(imageResize({
 				width: size
 			}))
@@ -344,7 +489,9 @@ function imagesthumb(cb) {
 				path.basename = `${path.basename}@${size}w`;
 			}))
 			.pipe(imagemin(plugins))
-			.pipe(debug({title: 'datei:'}))
+			.pipe(debug({
+				title: 'datei:'
+			}))
 			.pipe(gulp.dest(config.paths.dist.img))
 	});
 	cb();
@@ -383,15 +530,17 @@ const watchFiles = () => {
 	gulp.watch('src/js/**/*.js', gulp.series(scripts, browserSyncReload));
 	gulp.watch(config.paths.src.static, gulp.series(staticFiles, browserSyncReload));
 	gulp.watch('src/font/**/*', gulp.series(fonts, browserSyncReload));
-	gulp.watch('src/img/**/*', gulp.series(images, imageswebp, imagesthumb))
+	gulp.watch('src/img/**/*', gulp.series(images,  imagesthumb,imageswebp))
 }
 
 
 // was geht ? -> npm run -> in Console 
-const build = gulp.series(cleanDir, gulp.parallel(css, scripts, staticFiles, fonts, images, imageswebp, imagesthumb))
+const build = gulp.series(cleanDir, gulp.series(gulp.parallel(css, scripts, staticFiles, fonts, images, imagesthumb), imageswebp))
 const serve = gulp.series(build, gulp.parallel(watchFiles, devServer))
 const watch = gulp.parallel(build, watchFiles)
 const convert = gulp.series(bulma_copy_from_node)
+const tests = gulp.series(testen)
+
 
 exports.default = build
 exports.build = build
@@ -402,3 +551,4 @@ exports.css = css
 exports.js = scripts
 exports.clean = cleanDir
 exports.fonts = fonts
+exports.tests = tests
